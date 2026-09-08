@@ -17,9 +17,9 @@ export function useCounter(initialValue = 0) {
   const [count, setCount] = useState(initialValue);
 
   return {
-    count: initialValue,
-    increment: () => {},
-    decrement: () => {},
-    reset: () => {},
+    count,
+    increment: () => setCount((prev) => prev + 1),
+    decrement: () => setCount((prev) => prev - 1),
+    reset: () => setCount(initialValue),
   };
 }

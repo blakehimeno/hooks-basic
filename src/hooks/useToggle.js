@@ -8,7 +8,10 @@
 // TODO 4: return [value, toggle] (an array, like useState itself does)
 //
 // Used by: src/components/ToggleDemo.jsx
+import { useState} from "react";
+
 
 export function useToggle(initialValue = false) {
-  return [initialValue, () => {}];
+  const [value, setValue] = useState(initialValue);
+  return [value, () => setValue((prev) => !prev)];
 }

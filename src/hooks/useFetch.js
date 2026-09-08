@@ -13,7 +13,26 @@
 //
 // Used by: src/components/FetchDemo.jsx, which fetches a random joke from
 // https://api.chucknorris.io/jokes/random
+import { useState, useEffect } from "react";
 
 export function useFetch(url) {
-  return { data: null, loading: false, error: null };
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  useEffect(() => {
+    setLoading(true);
+    setError(null);
+
+    fetch(url)
+      .then((response) => response.json())
+      .then((json) => {
+        setData(json);
+        setLoading(false);
+      })
+      .catch((err) => {
+        setError(err.message);
+        setLoading(false);
+      });
+  }, [url]);
+  return { data, loading, error};
 }
