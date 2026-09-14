@@ -11,6 +11,14 @@
 // Used by: src/components/ThemeDemo.jsx, which is rendered inside a
 // <ThemeProvider> in src/pages/MoreHooks.jsx
 
+import { useContext } from "react";
+import {ThemeContext} from "./ThemeContext.jsx";
+
 export function useTheme() {
-  return { theme: "light", toggleTheme: () => {} };
+  const value = useContext(ThemeContext);
+
+  if (value === undefined) {
+    throw new Error("useThememust be used within a ThemeProvider");
+  }
+  return value;
 }
